@@ -10,14 +10,13 @@
         rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link href="./output.css" rel="stylesheet">
-    <script src="script.js" defer></script>
 </head>
 
 <body class="bg-gray-900 text-amber-100">
     <div id="animation-con">
-
+        
     </div>
-
+    
     <div id="loading" class="fixed inset-0  flex items-center justify-center">
         <div>
             <i class="fas fa-spinner fa-spin text-5xl mb-4 text-blue-400"></i>
@@ -25,22 +24,22 @@
         </div>
    </div>
 
-    <div id="error" class="fixed insert-0 flex items-center justify-center z-50 hidden">
+    <div id="error" class="fixed insert-0 items-center justify-center z-50 hidden">
         <div class="bg-red-900 border border-red-700 rounded-lg shadow-xl p-6 w-11/12 text-center">
             <h3 class="text-2xl font-bold mb-4">Oops! Something went wrong.</h3>
             <p class="mb-6" id="error-msg">Could not fetch weather data.</p>
             <button class="bg-red-600 hover:700 text-white font-bold py-2 px-6 rounded-2xl"
-                id="close-btn">Close</button>
+            id="close-btn">Close</button>
         </div>
     </div>
-
-
-    <div class="min-h-screen w-full p-4 duration-75 opacity-0" id="weather-content">
+    
+    
+    <div class="min-h-screen w-full p-4 duration-75" id="weather-content">
         <div class="w-full mx-auto mb-8 relative">
             <form id="search-form" class="flex items-center">
                 <input type="text" id="city-input" placeholder="Search for city..."
                     class="w-full bg-transparent text-white placeholder-gray-300 border-none py-4 px-6 rounded-full">
-                <button type="submit" class="bg-blue-600 hover:bg-blue-700 py-4 px-8 rounded-full">Search</button>
+                <button type="button" id="search-btn" class="bg-blue-600 hover:bg-blue-700 py-4 px-8 rounded-full">Search</button>
             </form>
         </div>
 
@@ -50,7 +49,7 @@
                     <div class="text-center text-white">
                         <h2 id="city-name" class="text">City Name</h2>
                         <p id="current-date">Monday,July 2025</p>
-                        <p id="current-time" class="class="text-lg">00:00:00 Am</p>
+                        <p id="current-time" class="text-lg">00:00:00 Am</p>
                         <p id="current-temp" class="text-lg">0</p>
                         <p id="current-weather" class="text-xl ">Weather</p>
                     </div>
@@ -62,6 +61,7 @@
             </div>
         </main>
     </div>
+    <script src="script.js"></script>
 </body>
 
 </html>

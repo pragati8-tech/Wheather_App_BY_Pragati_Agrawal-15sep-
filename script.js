@@ -16,7 +16,11 @@ const currentWeather = document.querySelector('#current-wheather')
 const icon = document.querySelector('#icon')
 const forecastCon = document.querySelector('#forecast-con')
 
-
+searchBtn.addEventListener('click',()=>{
+    const cityValue = cityInput.value
+    console.log(cityValue) 
+    fetchWeather(cityValue)
+})
 
 const fetchWeather = async (city) => {
     showLoading()
@@ -62,5 +66,5 @@ const showError = (msg) => {
     error.classList.remove('hidden')
     error.classList.add('flex')
 }
-fetchWeather('raipur')
+
 

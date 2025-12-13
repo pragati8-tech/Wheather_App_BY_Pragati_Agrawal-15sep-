@@ -16,11 +16,6 @@ const currentWeather = document.querySelector('#current-wheather')
 const icon = document.querySelector('#icon')
 const forecastCon = document.querySelector('#forecast-con')
 
-searchBtn.addEventListener('click',()=>{
-    const cityValue = cityInput.value
-    console.log(cityValue) 
-    fetchWeather(cityValue)
-})
 
 const fetchWeather = async (city) => {
     showLoading()
@@ -33,16 +28,26 @@ const fetchWeather = async (city) => {
             // console.log(getResponce);
             if (!getResponce.ok) throw new Error(`Could not find data for "${city}".`)
             const data = await getResponce.json()
-            console.log(data)
-            if (data.length === 0) throw new Error(`Could not find location data for "${city}".`)
+        console.log(data)
+        if (data.length === 0) throw new Error(`Could not find location data for "${city}".`)
             let latitude = data[0].lat
-            let longitude = data[0].lon
-            const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${API_KEY}`
+        let longitude = data[0].lon
+        const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${API_KEY}`
             // const forecastUrl = `api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${API_KEY}`
             const weatherResponce = await fetch(weatherUrl)
-            const data1 = await weatherResponce.json()
+            const weatherData = await weatherResponce.json()
             // console.log(weatherResponce)
-            console.log(data1)
+            console.log(weatherData)
+            const temp = Math.round(weatherData.main.temp - 273.15)
+            console.log(temp);
+            //display city value to show current weather
+            cityName.innerText = data[0].name
+            currentTemp.innerText = temp
+            const date = new Date()
+            const day = date.toLocaleDateString('en-IN', { weekday: 'long' });
+            console.log(date)
+            //Thu Dec 11 2025 15:34:39 GMT+0530 (India Standard Time)
+            console.log(day);
 
         }
 
@@ -66,5 +71,10 @@ const showError = (msg) => {
     error.classList.remove('hidden')
     error.classList.add('flex')
 }
-
-
+// taking city value
+searchBtn.addEventListener('click',()=>{
+    const cityValue = cityInput.value
+    console.log(cityValue) 
+    fetchWeather(cityValue)
+    
+})

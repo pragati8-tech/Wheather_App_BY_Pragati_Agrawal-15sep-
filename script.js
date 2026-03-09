@@ -20,7 +20,7 @@ const forecastCon = document.querySelector('#forecast-con')
 const fetchWeather = async (city) => {
     showLoading()
     try {
-        if (!API_KEY) {throw new Error("OpenWeatherMap API Key is missing.")}
+        if (!API_KEY) { throw new Error("OpenWeatherMap API Key is missing.") }
 
         if (city) {
             const Url = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${API_KEY}`
@@ -28,11 +28,11 @@ const fetchWeather = async (city) => {
             // console.log(getResponce);
             if (!getResponce.ok) throw new Error(`Could not find data for "${city}".`)
             const data = await getResponce.json()
-        console.log(data)
-        if (data.length === 0) throw new Error(`Could not find location data for "${city}".`)
+            console.log(data)
+            if (data.length === 0) throw new Error(`Could not find location data for "${city}".`)
             let latitude = data[0].lat
-        let longitude = data[0].lon
-        const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${API_KEY}`
+            let longitude = data[0].lon
+            const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${API_KEY}`
             // const forecastUrl = `api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${API_KEY}`
             const weatherResponce = await fetch(weatherUrl)
             const weatherData = await weatherResponce.json()
@@ -41,14 +41,9 @@ const fetchWeather = async (city) => {
             const temp = Math.round(weatherData.main.temp - 273.15)
             console.log(temp);
             //display city value to show current weather
-            cityName.innerText = data[0].name
+            cityName.innerText = city
             currentTemp.innerText = temp
-            const date = new Date()
-            const day = date.toLocaleDateString('en-IN', { weekday: 'long' });
-            console.log(date)
             //Thu Dec 11 2025 15:34:39 GMT+0530 (India Standard Time)
-            console.log(day);
-
         }
 
     } catch (error) {
@@ -72,9 +67,22 @@ const showError = (msg) => {
     error.classList.add('flex')
 }
 // taking city value
-searchBtn.addEventListener('click',()=>{
+searchBtn.addEventListener('click', () => {
     const cityValue = cityInput.value
-    console.log(cityValue) 
+    console.log(cityValue)
     fetchWeather(cityValue)
-    
+
 })
+
+const date = new Date()
+const day = date.toLocaleDateString('en-IN', { weekday: 'long' });
+
+// console.log(time);
+const arr = date.toString().split(" ")
+const dayDateTime = `${arr[0]} ${arr[1]} ${arr[2]} ${arr[3]}`
+
+console.log(dayDateTime)
+currentDate.innerText = dayDateTime
+
+
+
